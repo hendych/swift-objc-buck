@@ -26,7 +26,7 @@ To build target you can run this command
 make build app
 ```
 
-![](etc/build.gif)
+![](Etc/build.gif)
 
 ### Test Target
 
@@ -37,7 +37,7 @@ To test target you can run this command
 make test app
 ```
 
-![](etc/test.gif)
+![](Etc/test.gif)
 
 # Generating an Xcode Project
 
