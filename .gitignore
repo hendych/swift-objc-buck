@@ -1,0 +1,13 @@
+.DS_Store
+
+# Buck
+buck-out/
+.buckd/
+
+# Xcode
+**/xcuserdata/
+**/*.xcodeproj/
+**/*.xcworkspace/
+
+# Make
+*.d

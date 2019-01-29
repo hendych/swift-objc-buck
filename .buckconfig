@@ -1,0 +1,44 @@
+[cxx]
+  default_platform = iphonesimulator-x86_64
+  cflags = -g -fmodules -fobjc-arc -D BUCK -w
+  cxxflags = -fobjc-arc -std=c++14 -D DEBUG -g
+  combined_preprocess_and_compile = true
+  pch_enabled = false
+  ldflags = -Xlinker -objc_abi_version -Xlinker 2 -fobjc-arc -fobjc-link-runtime
+
+[alias]
+  app = //App:SwiftObjcBuck
+
+[swift]
+  version = 4.2
+  compiler_flags = -DBUCK -enable-testing -g -Onone -whole-module-optimization
+  use_filelist = true
+
+[apple]
+  iphonesimulator_target_sdk_version = 9.0
+  iphoneos_target_sdk_version = 9.0
+  use_swift_delegate = false
+  use_header_maps_in_xcode = false
+  generate_missing_umbrella_headers = true
+  provisioning_profile_read_command = security cms -Di
+  xctool_default_destination_specifier = name=iPhone 6,platform=iOS Simulator,OS=latest
+  xctool_path = Vendor/xctool/bin/xctool
+
+[parser]
+  polyglot_parsing_enabled = true
+  default_build_file_syntax = SKYLARK
+
+[project]
+  ide_force_kill = always
+  ide = xcode
+  allow_symlinks = forbid
+  ignore = .buckd, \
+             .hg, \
+             .git, \
+             .idea, \
+             buck-cache, \
+             buck-out, \
+
+[cache]
+  mode = dir
+  dir_max_size = 5GB

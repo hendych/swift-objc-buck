@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FirstViewController" customModule="SwiftObjcBuckBin" customModuleProvider="target">
+            <connections>
+                <outlet property="label" destination="Izw-mp-dJS" id="ZFg-Vf-zMw"/>
+                <outlet property="view" destination="iN0-l3-epB" id="9p1-td-w79"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yHG-jN-xsX">
+                    <rect key="frame" x="155.5" y="318.5" width="64" height="30"/>
+                    <accessibility key="accessibilityConfiguration" identifier="generateButton"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="64" id="duf-vy-ZqV"/>
+                        <constraint firstAttribute="height" constant="30" id="obc-hw-lww"/>
+                    </constraints>
+                    <state key="normal" title="Generate"/>
+                    <connections>
+                        <action selector="generateLabel" destination="-1" eventType="touchUpInside" id="G5d-3t-wTu"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Izw-mp-dJS">
+                    <rect key="frame" x="187.5" y="365" width="0.0" height="21"/>
+                    <accessibility key="accessibilityConfiguration" identifier="label"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="hZ2-WR-vFt"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Izw-mp-dJS" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Sh7-Un-zN7"/>
+                <constraint firstItem="Izw-mp-dJS" firstAttribute="top" secondItem="yHG-jN-xsX" secondAttribute="bottom" constant="16.5" id="kN4-lr-zkp"/>
+                <constraint firstItem="yHG-jN-xsX" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="q4Q-10-vuZ"/>
+                <constraint firstItem="yHG-jN-xsX" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="zvu-Lr-RGm"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="138.40000000000001" y="111.99400299850076"/>
+        </view>
+    </objects>
+</document>

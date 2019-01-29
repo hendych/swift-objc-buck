@@ -1,0 +1,124 @@
+load("//Config:project-config.bzl", "binary_configs", "library_configs", "test_configs")
+
+## App Setup
+apple_asset_catalog(
+    name = "SwiftObjcBuckAssets",
+    app_icon = "AppIcon",
+    dirs = ["Assets.xcassets"],
+)
+
+apple_resource(
+    name = "SwiftObjcBuckResource",
+    files = glob([
+        "**/*.storyboard",
+        "**/*.xib",
+    ]),
+)
+
+apple_binary(
+    name = "SwiftObjcBuckBin",
+    configs = binary_configs("SwiftObjcBuck"),
+    bridging_header = "SwiftObjcBuck-Bridging-Header.h",
+    # visibility = ['PUBLIC'],
+    # preprocessor_flags = ['-fobjc-arc', '-Wno-objc-designated-initializers'],
+    headers = glob([
+        "*.h",
+    ],
+        exclude = [
+            "SwiftObjcBuck-Bridging-Header.h", # Prevent bridging header referenced twice
+        ],
+    ),
+    srcs = glob([
+    	"*.swift",
+        "*.m",
+    ]),
+    deps = [
+        ":SwiftObjcBuckResource",
+        ":SwiftObjcBuckAssets",
+    ],
+    frameworks = [
+    "$SDKROOT/System/Library/Frameworks/UIKit.framework",
+    "$SDKROOT/System/Library/Frameworks/Foundation.framework",
+  ],
+)
+
+apple_bundle(
+    name = "SwiftObjcBuck",
+    extension = "app",
+    binary = ":SwiftObjcBuckBin",
+    info_plist = "Info.plist",
+    tests = [
+        ":Tests",
+        ":UITests",
+    ],
+)
+
+apple_package(
+  name = "SwiftObjcBuckPackage",
+  bundle = ":SwiftObjcBuck",
+)
+
+
+## Tests Target Setup
+apple_test(
+  name = "Tests",
+  test_host_app = ":SwiftObjcBuck",
+  srcs = glob([
+    "Tests/*Tests.swift",
+    "Tests/*Tests.m",
+  ]),
+  header_path_prefix = "SwiftObjcBuckBin",
+  configs = test_configs("Tests"),
+  bridging_header = "Tests/Tests-Bridging-Header.h",
+  # preprocessor_flags = [
+  #   '-Xcc -I SwiftObjcBuckBin',
+  # ],
+  # linker_flags = [
+  #   '-undefined',
+  #   'dynamic_lookup',
+  # ],
+  # compiler_flags = [
+  #   "-I buck-out/gen/App/SwiftObjcBuckBin#apple-swift-compile,iphonesimulator-x86_64"
+  # ],
+  deps = [
+    ":SwiftObjcBuck",
+  ],
+  info_plist = "Tests/Info.plist",
+  frameworks = [
+    "$SDKROOT/System/Library/Frameworks/Foundation.framework",
+    "$PLATFORM_DIR/Developer/Library/Frameworks/XCTest.framework",
+    "$SDKROOT/System/Library/Frameworks/UIKit.framework",
+  ],
+)
+
+apple_test(
+  name = "UITests",
+  test_host_app = ":SwiftObjcBuck",
+  is_ui_test = True,
+  srcs = glob([
+    "UITests/*UITests.swift",
+    "UITests/*UITests.m",
+  ]),
+  configs = test_configs("UITests"),
+  bridging_header = "UITests/UITests-Bridging-Header.h",
+  info_plist = "UITests/Info.plist",
+  frameworks = [
+    "$SDKROOT/System/Library/Frameworks/Foundation.framework",
+    "$PLATFORM_DIR/Developer/Library/Frameworks/XCTest.framework",
+    "$SDKROOT/System/Library/Frameworks/UIKit.framework",
+  ],
+)
+
+## Xcode Workspace Generator
+xcode_workspace_config(
+    name = "workspace",
+    workspace_name = "SwiftObjcBuck",
+    src_target = ":SwiftObjcBuck",
+    additional_scheme_actions = {
+        "Build": {
+            "PRE_SCHEME_ACTIONS": ["echo 'Started'"],
+            "POST_SCHEME_ACTIONS": ["echo 'Finished'"],
+        },
+    },
+    action_config_names = {"profile": "Profile"},
+)
